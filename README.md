@@ -119,6 +119,6 @@ CSDN：[http://blog.csdn.net/jiaoyaning1210/article/details/78427818](http://blo
 
 ---
 
-如果对您有帮助的话，还请给个收藏或者star，谢谢！
+如果对您有帮助的话，还请给个star，谢谢！
 
 ---
