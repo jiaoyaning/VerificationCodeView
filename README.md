@@ -2,6 +2,7 @@
 Android 自定义方形输入框，仿滴滴验证码、小篮单车验证码输入框
 
 ##效果图
+
 ![Screenshot](screenshot/screenshot.gif)
 
 GIF被压缩的有点模糊，下面是截图
