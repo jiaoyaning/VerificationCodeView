@@ -1,7 +1,7 @@
 # VerificationCodeView
 Android 自定义方形输入框，仿滴滴验证码、小篮单车验证码输入框
 
-##效果图
+## 效果图
 
 ![Screenshot](screenshot/screenshot.gif)
 
@@ -10,8 +10,7 @@ GIF被压缩的有点模糊，下面是截图
 ![Screenshot](screenshot/screenshot_1.jpg)
 
 ---
-##用法
-所有属性
+## 用法
 
 ```
     <com.jyn.vcview.VerificationCodeView
@@ -61,7 +60,7 @@ verificationcodeview.setOnCodeFinishListener(new VerificationCodeView.OnCodeFini
         <attr name="vcv_et_cursor" format="reference" />
     </declare-styleable>
 ```
-vcv_et_bg 背景示例（默认）
+`vcv_et_bg` 背景示例（默认）
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
@@ -83,7 +82,7 @@ vcv_et_bg 背景示例（默认）
     </item>
 </selector>
 ```
-vcv_et_cursor 光标示例（默认）
+`vcv_et_cursor` 光标示例（默认）
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
@@ -123,4 +122,3 @@ CSDN：[http://blog.csdn.net/jiaoyaning1210/article/details/78427818](http://blo
 如果对您有帮助的话，还请给个收藏或者star，谢谢！
 
 ---
-
