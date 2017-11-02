@@ -2,6 +2,7 @@
 Android 自定义方形输入框，仿滴滴验证码、小篮单车验证码输入框
 
 ##效果图
+
 ![Screenshot](screenshot/screenshot.gif)
 
 GIF被压缩的有点模糊，下面是截图
@@ -109,7 +110,17 @@ Step 2. Add the dependency
 
 ```
 dependencies {
-        compile 'com.jyn.verificationcodeview:verificationcodeview:1.0.0'
-
+     compile 'com.jyn.verificationcodeview:verificationcodeview:1.0.0'
 }
 ```
+
+## 开发思路
+简书：[http://www.jianshu.com/p/781950fe5e73](http://www.jianshu.com/p/781950fe5e73)
+CSDN：[http://blog.csdn.net/jiaoyaning1210/article/details/78427818](http://blog.csdn.net/jiaoyaning1210/article/details/78427818)
+
+---
+
+如果对您有帮助的话，还请给个收藏或者star，谢谢！
+
+---
+

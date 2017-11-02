@@ -158,7 +158,7 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
             EditText editText = new EditText(mContext);
             initEditText(editText, i);
             addView(editText);
-            if (i == 0) {
+            if (i == 0) { //设置第一个editText获取焦点
                 editText.setFocusable(true);
             }
         }
@@ -256,6 +256,7 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
     private void focus() {
         int count = getChildCount();
         EditText editText;
+        //利用for循环找出还最前面那个还没被输入字符的EditText，并把焦点移交给它。
         for (int i = 0; i < count; i++) {
             editText = (EditText) getChildAt(i);
             if (editText.getText().length() < 1) {
@@ -266,16 +267,18 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
                 editText.setCursorVisible(false);
             }
         }
+        //如果最后一个输入框有字符，则返回结果
         EditText lastEditText = (EditText) getChildAt(mEtNumber - 1);
         if (lastEditText.getText().length() > 0) {
-            lastEditText.requestFocus();
             getResult();
         }
     }
 
     private void backFocus() {
+        //博主手机不好，经常点一次却触发两次`onKey`事件，就设置了一个防止多点击，间隔100毫秒。
         long startTime = System.currentTimeMillis();
         EditText editText;
+        //循环检测有字符的`editText`，把其置空，并获取焦点。
         for (int i = mEtNumber - 1; i >= 0; i--) {
             editText = (EditText) getChildAt(i);
             if (editText.getText().length() >= 1 && startTime - endTime > 100) {
