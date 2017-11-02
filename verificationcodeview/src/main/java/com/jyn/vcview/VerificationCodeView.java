@@ -38,6 +38,10 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
     private int mEtNumber;
 
     /**
+     * 输入框类型
+     */
+    private VCInputType mEtInputType;
+    /**
      * 输入框的宽度
      */
     private int mEtWidth;
@@ -59,12 +63,21 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
 
     private int mCursorDrawable;
 
+    public enum VCInputType {
+        NUMBER,
+        NUMBERPASSWORD,
+        TEXT,
+        TEXTPASSWORD,
+    }
+
     public VerificationCodeView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
         @SuppressLint({"Recycle", "CustomViewStyleable"})
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.vericationCodeView);
         mEtNumber = typedArray.getInteger(R.styleable.vericationCodeView_vcv_et_number, 4);
+        int inputType = typedArray.getInt(R.styleable.vericationCodeView_vcv_et_inputType, VCInputType.NUMBER.ordinal());
+        mEtInputType = VCInputType.values()[inputType];
         mEtWidth = typedArray.getDimensionPixelSize(R.styleable.vericationCodeView_vcv_et_width, 120);
         mEtTextColor = typedArray.getColor(R.styleable.vericationCodeView_vcv_et_text_color, Color.BLACK);
         mEtTextSize = typedArray.getDimensionPixelSize(R.styleable.vericationCodeView_vcv_et_text_size, 16);
@@ -80,44 +93,65 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
     private void initView() {
         for (int i = 0; i < mEtNumber; i++) {
             EditText editText = new EditText(mContext);
-            int childHPadding = 14;
-            int childVPadding = 14;
-
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(mEtWidth, mEtWidth);
-            layoutParams.bottomMargin = childVPadding;
-            layoutParams.topMargin = childVPadding;
-            layoutParams.leftMargin = childHPadding;
-            layoutParams.rightMargin = childHPadding;
-            layoutParams.gravity = Gravity.CENTER;
-
-            editText.setLayoutParams(layoutParams);
-            editText.setGravity(Gravity.CENTER);
-            editText.setId(i);
-            editText.setCursorVisible(true);
-            editText.setMaxEms(1);
-            editText.setTextColor(mEtTextColor);
-            editText.setTextSize(mEtTextSize);
-            editText.setMaxLines(1);
-            editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
-            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-            editText.setPadding(0, 0, 0, 0);
-            editText.setOnKeyListener(this);
-            editText.setBackgroundResource(mEtTextBg);
-            try {//修改光标的颜色（反射）
-                Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
-                f.setAccessible(true);
-                f.set(editText, mCursorDrawable);
-            } catch (Exception ignored) {
-            }
-            editText.addTextChangedListener(this);
-            editText.setOnFocusChangeListener(this);
-            editText.setOnKeyListener(this);
+            initEditText(editText, i);
             addView(editText);
             if (i == 0) {
                 editText.setFocusable(true);
             }
         }
     }
+
+    private void initEditText(EditText editText, int i) {
+        int childHPadding = 14;
+        int childVPadding = 14;
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(mEtWidth, mEtWidth);
+        layoutParams.bottomMargin = childVPadding;
+        layoutParams.topMargin = childVPadding;
+        layoutParams.leftMargin = childHPadding;
+        layoutParams.rightMargin = childHPadding;
+        layoutParams.gravity = Gravity.CENTER;
+        editText.setLayoutParams(layoutParams);
+        editText.setGravity(Gravity.CENTER);
+        editText.setId(i);
+        editText.setCursorVisible(true);
+        editText.setMaxEms(1);
+        editText.setTextColor(mEtTextColor);
+        editText.setTextSize(mEtTextSize);
+        editText.setMaxLines(1);
+        editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
+        switch (mEtInputType) {
+            case NUMBER:
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                break;
+            case NUMBERPASSWORD:
+                editText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                break;
+            case TEXT:
+                editText.setInputType(InputType.TYPE_CLASS_TEXT);
+                break;
+            case TEXTPASSWORD:
+                editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                break;
+            default:
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        }
+        editText.setPadding(0, 0, 0, 0);
+        editText.setOnKeyListener(this);
+        editText.setBackgroundResource(mEtTextBg);
+
+        //修改光标的颜色（反射）
+        try {
+            Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
+            f.setAccessible(true);
+            f.set(editText, mCursorDrawable);
+        } catch (Exception ignored) {
+        }
+        editText.addTextChangedListener(this);
+        editText.setOnFocusChangeListener(this);
+        editText.setOnKeyListener(this);
+    }
+
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

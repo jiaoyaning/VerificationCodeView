@@ -4,6 +4,13 @@
     <declare-styleable name="vericationCodeView">
         <!--输入框的数量-->
         <attr name="vcv_et_number" format="integer" />
+        <!--输入类型-->
+        <attr name="vcv_et_inputType">
+            <enum name="number" value="0" />
+            <enum name="numberPassword" value="1" />
+            <enum name="text" value="2" />
+            <enum name="textPassword" value="3" />
+        </attr>
         <!--输入框的宽度-->
         <attr name="vcv_et_width" format="dimension|reference" />
         <!--输入框文字颜色-->

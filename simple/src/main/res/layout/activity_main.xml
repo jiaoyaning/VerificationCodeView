@@ -13,8 +13,8 @@
         android:orientation="horizontal"
         app:vcv_et_bg="@drawable/et_login_code"
         app:vcv_et_cursor="@drawable/et_cursor"
+        app:vcv_et_inputType="text"
         app:vcv_et_number="6"
         app:vcv_et_text_color="@android:color/black"
-        app:vcv_et_text_size="15" />
-
+        app:vcv_et_text_size="6sp" />
 </LinearLayout>
