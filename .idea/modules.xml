@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/VerificationCodeView.iml" filepath="$PROJECT_DIR$/VerificationCodeView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simple/simple.iml" filepath="$PROJECT_DIR$/simple/simple.iml" />
+      <module fileurl="file://$PROJECT_DIR$/verificationcodeview/verificationcodeview.iml" filepath="$PROJECT_DIR$/verificationcodeview/verificationcodeview.iml" />
+    </modules>
+  </component>
+</project>
