@@ -114,7 +114,7 @@ dependencies {
 ```
 
 ## 开发思路
-简书：[http://www.jianshu.com/p/781950fe5e73](http://www.jianshu.com/p/781950fe5e73)
+简书：[http://www.jianshu.com/p/781950fe5e73](http://www.jianshu.com/p/781950fe5e73)  
 CSDN：[http://blog.csdn.net/jiaoyaning1210/article/details/78427818](http://blog.csdn.net/jiaoyaning1210/article/details/78427818)
 
 ---
