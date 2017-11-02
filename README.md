@@ -11,7 +11,6 @@ GIF被压缩的有点模糊，下面是截图
 
 ---
 ## 用法
-所有属性
 
 ```
     <com.jyn.vcview.VerificationCodeView
