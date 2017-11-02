@@ -61,7 +61,7 @@ verificationcodeview.setOnCodeFinishListener(new VerificationCodeView.OnCodeFini
         <attr name="vcv_et_cursor" format="reference" />
     </declare-styleable>
 ```
-vcv_et_bg 背景示例（默认）
+`vcv_et_bg` 背景示例（默认）
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
@@ -83,7 +83,7 @@ vcv_et_bg 背景示例（默认）
     </item>
 </selector>
 ```
-vcv_et_cursor 光标示例（默认）
+`vcv_et_cursor` 光标示例（默认）
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
