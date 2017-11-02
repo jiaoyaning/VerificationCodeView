@@ -4,17 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.jyn.vcview.simple.MainActivity">
 
     <com.jyn.vcview.VerificationCodeView
+        android:id="@+id/verificationcodeview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:vcv_et_bg="@drawable/et_login_code"
         app:vcv_et_cursor="@drawable/et_cursor"
-        app:vcv_et_inputType="text"
-        app:vcv_et_number="6"
+        app:vcv_et_inputType="number"
+        app:vcv_et_number="4"
         app:vcv_et_text_color="@android:color/black"
         app:vcv_et_text_size="6sp" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp" />
 </LinearLayout>

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -20,10 +19,10 @@ import android.widget.TextView;
 import java.lang.reflect.Field;
 
 /**
- * @author jiaoyaning
- * @package com.b2cf.nonghe.widget
- * @filename VerificationCodeView
- * @date 2017/10/31
+ * jiaoyaning
+ * com.b2cf.nonghe.widget
+ * VerificationCodeView
+ * 2017/10/31
  */
 
 public class VerificationCodeView extends LinearLayout implements TextWatcher, View.OnKeyListener, View.OnFocusChangeListener {
@@ -63,6 +62,70 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
 
     private int mCursorDrawable;
 
+    public OnCodeFinishListener getOnCodeFinishListener() {
+        return onCodeFinishListener;
+    }
+
+    public void setOnCodeFinishListener(OnCodeFinishListener onCodeFinishListener) {
+        this.onCodeFinishListener = onCodeFinishListener;
+    }
+
+    public int getmEtNumber() {
+        return mEtNumber;
+    }
+
+    public void setmEtNumber(int mEtNumber) {
+        this.mEtNumber = mEtNumber;
+    }
+
+    public VCInputType getmEtInputType() {
+        return mEtInputType;
+    }
+
+    public void setmEtInputType(VCInputType mEtInputType) {
+        this.mEtInputType = mEtInputType;
+    }
+
+    public int getmEtWidth() {
+        return mEtWidth;
+    }
+
+    public void setmEtWidth(int mEtWidth) {
+        this.mEtWidth = mEtWidth;
+    }
+
+    public int getmEtTextColor() {
+        return mEtTextColor;
+    }
+
+    public void setmEtTextColor(int mEtTextColor) {
+        this.mEtTextColor = mEtTextColor;
+    }
+
+    public float getmEtTextSize() {
+        return mEtTextSize;
+    }
+
+    public void setmEtTextSize(float mEtTextSize) {
+        this.mEtTextSize = mEtTextSize;
+    }
+
+    public int getmEtTextBg() {
+        return mEtTextBg;
+    }
+
+    public void setmEtTextBg(int mEtTextBg) {
+        this.mEtTextBg = mEtTextBg;
+    }
+
+    public int getmCursorDrawable() {
+        return mCursorDrawable;
+    }
+
+    public void setmCursorDrawable(int mCursorDrawable) {
+        this.mCursorDrawable = mCursorDrawable;
+    }
+
     public enum VCInputType {
         NUMBER,
         NUMBERPASSWORD,
@@ -70,7 +133,7 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         TEXTPASSWORD,
     }
 
-    public VerificationCodeView(Context context, @Nullable AttributeSet attrs) {
+    public VerificationCodeView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
         @SuppressLint({"Recycle", "CustomViewStyleable"})
