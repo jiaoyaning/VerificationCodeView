@@ -42,7 +42,7 @@ def libName = "verificationcodeview"
 //compile引用时的第1部分
 group = "com.jyn.verificationcodeview"
 // 版本号，//compile引用时的最后部分项目名，下次更新是只需要更改版本号即可
-version = "1.0.0"
+version = "1.0.1"
 
 //生成源文件
 task sourcesJar(type: Jar) {

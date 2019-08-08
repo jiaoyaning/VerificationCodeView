@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -158,6 +159,7 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         int inputType = typedArray.getInt(R.styleable.vericationCodeView_vcv_et_inputType, VCInputType.NUMBER.ordinal());
         mEtInputType = VCInputType.values()[inputType];
         Log.i("main", "mEtInputType:" + mEtInputType);
+
         mEtWidth = typedArray.getDimensionPixelSize(R.styleable.vericationCodeView_vcv_et_width, 120);
         mEtTextColor = typedArray.getColor(R.styleable.vericationCodeView_vcv_et_text_color, Color.BLACK);
         mEtTextSize = typedArray.getDimensionPixelSize(R.styleable.vericationCodeView_vcv_et_text_size, 16);
@@ -206,13 +208,14 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
                 editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
             case NUMBERPASSWORD:
-                editText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 break;
             case TEXT:
                 editText.setInputType(InputType.TYPE_CLASS_TEXT);
                 break;
             case TEXTPASSWORD:
-                editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
             default:
                 editText.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -282,7 +285,7 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
             if (editText.getText().length() < 1) {
                 if (cursorVisible) {
                     editText.setCursorVisible(true);
-                }else {
+                } else {
                     editText.setCursorVisible(false);
                 }
                 editText.requestFocus();
@@ -307,7 +310,7 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
                 editText.setText("");
                 if (cursorVisible) {
                     editText.setCursorVisible(true);
-                }else {
+                } else {
                     editText.setCursorVisible(false);
                 }
                 editText.requestFocus();
