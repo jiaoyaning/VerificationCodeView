@@ -8,7 +8,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -61,6 +60,16 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
      * 输入框背景
      */
     private int mEtTextBg;
+
+    /**
+     * 输入框间距
+     */
+    private int mEtSpacing;
+
+    /**
+     * 判断是否平分
+     */
+    private boolean isBisect;
 
     private boolean cursorVisible;
 
@@ -158,14 +167,19 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         mEtNumber = typedArray.getInteger(R.styleable.vericationCodeView_vcv_et_number, 4);
         int inputType = typedArray.getInt(R.styleable.vericationCodeView_vcv_et_inputType, VCInputType.NUMBER.ordinal());
         mEtInputType = VCInputType.values()[inputType];
-        Log.i("main", "mEtInputType:" + mEtInputType);
-
         mEtWidth = typedArray.getDimensionPixelSize(R.styleable.vericationCodeView_vcv_et_width, 120);
         mEtTextColor = typedArray.getColor(R.styleable.vericationCodeView_vcv_et_text_color, Color.BLACK);
         mEtTextSize = typedArray.getDimensionPixelSize(R.styleable.vericationCodeView_vcv_et_text_size, 16);
         mEtTextBg = typedArray.getResourceId(R.styleable.vericationCodeView_vcv_et_bg, R.drawable.et_login_code);
         mCursorDrawable = typedArray.getResourceId(R.styleable.vericationCodeView_vcv_et_cursor, R.drawable.et_cursor);
         cursorVisible = typedArray.getBoolean(R.styleable.vericationCodeView_vcv_et_cursor_visible, true);
+
+        isBisect = typedArray.hasValue(R.styleable.vericationCodeView_vcv_et_spacing);
+        if (isBisect) {
+            mEtSpacing = typedArray.getDimensionPixelSize(R.styleable.vericationCodeView_vcv_et_spacing, 0);
+        }
+        Log.i("main", "isBisect:" + isBisect);
+
         //释放资源
         typedArray.recycle();
         initView();
@@ -184,15 +198,15 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
     }
 
     private void initEditText(EditText editText, int i) {
-        int childHPadding = 14;
-        int childVPadding = 14;
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(mEtWidth, mEtWidth);
-        layoutParams.bottomMargin = childVPadding;
-        layoutParams.topMargin = childVPadding;
-        layoutParams.leftMargin = childHPadding;
-        layoutParams.rightMargin = childHPadding;
+//        layoutParams.bottomMargin = childVPadding;
+//        layoutParams.topMargin = childVPadding;
+        layoutParams.leftMargin = mEtSpacing;
+        layoutParams.rightMargin = mEtSpacing;
+        
         layoutParams.gravity = Gravity.CENTER;
+
         editText.setLayoutParams(layoutParams);
         editText.setGravity(Gravity.CENTER);
         editText.setId(i);

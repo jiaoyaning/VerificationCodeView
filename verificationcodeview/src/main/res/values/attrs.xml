@@ -23,5 +23,8 @@
         <attr name="vcv_et_cursor" format="reference" />
         <!--是否隐藏光标-->
         <attr name="vcv_et_cursor_visible" format="boolean" />
+        <!--输入框间距，不输入则代表平分-->
+        <attr name="vcv_et_spacing" format="dimension|reference" />
+
     </declare-styleable>
 </resources>
