@@ -3,6 +3,7 @@ package com.jyn.vcview;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -67,13 +68,34 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
     private int mEtSpacing;
 
     /**
+     * 平分后的间距
+     */
+    private int mEtBisectSpacing;
+
+    /**
      * 判断是否平分
      */
     private boolean isBisect;
 
+    /**
+     * 是否显示光标
+     */
     private boolean cursorVisible;
 
+    /**
+     * 光标样式
+     */
     private int mCursorDrawable;
+
+    /**
+     * 输入框宽度
+     */
+    private int mViewWidth;
+
+    /**
+     * 输入框间距
+     */
+    private int mViewMargin;
 
     public OnCodeFinishListener getOnCodeFinishListener() {
         return onCodeFinishListener;
@@ -178,11 +200,9 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         if (isBisect) {
             mEtSpacing = typedArray.getDimensionPixelSize(R.styleable.vericationCodeView_vcv_et_spacing, 0);
         }
-        Log.i("main", "isBisect:" + isBisect);
-
+        initView();
         //释放资源
         typedArray.recycle();
-        initView();
     }
 
     @SuppressLint("ResourceAsColor")
@@ -199,11 +219,7 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
     }
 
     private void initEditText(EditText editText, int i) {
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(mEtWidth, mEtWidth);
-        layoutParams.leftMargin = mEtSpacing;
-        layoutParams.rightMargin = mEtSpacing;
-        layoutParams.gravity = Gravity.CENTER;
-        editText.setLayoutParams(layoutParams);
+        editText.setLayoutParams(getETLayoutParams(i));
         editText.setGravity(Gravity.CENTER);
         editText.setId(i);
         editText.setCursorVisible(false);
@@ -233,7 +249,40 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         editText.setPadding(0, 0, 0, 0);
         editText.setOnKeyListener(this);
         editText.setBackgroundResource(mEtTextBg);
+        setEditTextCursorDrawable(editText);
+        editText.addTextChangedListener(this);
+        editText.setOnFocusChangeListener(this);
+        editText.setOnKeyListener(this);
+    }
 
+    /**
+     * 获取EditText 的 LayoutParams
+     */
+    public LinearLayout.LayoutParams getETLayoutParams(int i) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(mEtWidth, mEtWidth);
+        if (!isBisect) {
+            //平分Margin，把第一个EditText跟最后一个EditText的间距同设为平分
+            mEtBisectSpacing = (mViewWidth - mEtNumber * mEtWidth) / (mEtNumber + 1);
+            if (i == 0) {
+                layoutParams.leftMargin = mEtBisectSpacing;
+                layoutParams.rightMargin = mEtBisectSpacing / 2;
+            } else if (i == mEtNumber - 1) {
+                layoutParams.leftMargin = mEtBisectSpacing / 2;
+                layoutParams.rightMargin = mEtBisectSpacing;
+            } else {
+                layoutParams.leftMargin = mEtBisectSpacing / 2;
+                layoutParams.rightMargin = mEtBisectSpacing / 2;
+            }
+        } else {
+            layoutParams.leftMargin = mEtSpacing;
+            layoutParams.rightMargin = mEtSpacing;
+        }
+
+        layoutParams.gravity = Gravity.CENTER;
+        return layoutParams;
+    }
+
+    public void setEditTextCursorDrawable(EditText editText) {
         //修改光标的颜色（反射）
         if (cursorVisible) {
             try {
@@ -243,17 +292,30 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
             } catch (Exception ignored) {
             }
         }
-        editText.addTextChangedListener(this);
-        editText.setOnFocusChangeListener(this);
-        editText.setOnKeyListener(this);
     }
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int measuredWidth = getMeasuredWidth();
-        Log.i("main", "measuredWidth:" + measuredWidth);
+        mViewWidth = getMeasuredWidth();
+        updateETMargin();
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+    }
+
+    private void updateETMargin() {
+        for (int i = 0; i < mEtNumber; i++) {
+            EditText editText = (EditText) getChildAt(i);
+            editText.setLayoutParams(getETLayoutParams(i));
+        }
     }
 
     @Override
