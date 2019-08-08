@@ -27,10 +27,9 @@ import java.lang.reflect.Field;
  * update 2019/8/8
  */
 
-public class VerificationCodeView extends LinearLayout implements TextWatcher, View.OnKeyListener, View.OnFocusChangeListener {
+public class VerificationCodeView extends LinearLayout implements TextWatcher, View.OnKeyListener {
 
     private Context mContext;
-    private long endTime = 0;
     private OnCodeFinishListener onCodeFinishListener;
 
     /**
@@ -251,7 +250,6 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         editText.setBackgroundResource(mEtTextBg);
         setEditTextCursorDrawable(editText);
         editText.addTextChangedListener(this);
-        editText.setOnFocusChangeListener(this);
         editText.setOnKeyListener(this);
     }
 
@@ -333,6 +331,14 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         if (s.length() != 0) {
             focus();
         }
+        if (onCodeFinishListener != null) {
+            onCodeFinishListener.onTextChange(this, getResult());
+            //如果最后一个输入框有字符，则返回结果
+            EditText lastEditText = (EditText) getChildAt(mEtNumber - 1);
+            if (lastEditText.getText().length() > 0) {
+                onCodeFinishListener.onComplete(this, getResult());
+            }
+        }
     }
 
     @Override
@@ -376,12 +382,6 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
                 }
             }
         }
-
-        //如果最后一个输入框有字符，则返回结果
-        EditText lastEditText = (EditText) getChildAt(mEtNumber - 1);
-        if (lastEditText.getText().length() > 0) {
-            getResult();
-        }
     }
 
     private void backFocus() {
@@ -402,27 +402,24 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         }
     }
 
-    private void getResult() {
-        StringBuffer stringBuffer = new StringBuffer();
+    private String getResult() {
+        StringBuilder stringBuffer = new StringBuilder();
         EditText editText;
         for (int i = 0; i < mEtNumber; i++) {
             editText = (EditText) getChildAt(i);
             stringBuffer.append(editText.getText());
         }
-        if (onCodeFinishListener != null) {
-            onCodeFinishListener.onComplete(stringBuffer.toString());
-        }
-    }
-
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if (hasFocus) {
-            focus();
-        }
+        return stringBuffer.toString();
     }
 
     public interface OnCodeFinishListener {
-        void onComplete(String content);
+
+        void onTextChange(View view, String content);
+
+        /**
+         * 输入完成
+         */
+        void onComplete(View view, String content);
     }
 
     /**

@@ -21,8 +21,13 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.text);
         verificationcodeview.setOnCodeFinishListener(new VerificationCodeView.OnCodeFinishListener() {
             @Override
-            public void onComplete(String content) {
-                textView.setText(content);
+            public void onTextChange(View view, String content) {
+                textView.setText("输入中：" + content);
+            }
+
+            @Override
+            public void onComplete(View view, String content) {
+                textView.setText("输入结束：" + content);
             }
         });
     }

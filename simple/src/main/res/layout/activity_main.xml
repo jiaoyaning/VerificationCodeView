@@ -11,7 +11,7 @@
         android:id="@+id/verificationcodeview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:vcv_et_bg="@drawable/et_login_code"
@@ -22,26 +22,19 @@
         app:vcv_et_text_color="@android:color/black"
         app:vcv_et_text_size="6sp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberPassword"
-        android:visibility="gone" />
-
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="验证码"
-        android:textSize="20sp" />
+        android:text="输入开始:" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:onClick="clear"
         android:text="清空输入框" />
 </LinearLayout>
