@@ -9,6 +9,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -59,6 +60,8 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
      * 输入框背景
      */
     private int mEtTextBg;
+
+    private boolean cursorVisible;
 
     private int mCursorDrawable;
 
@@ -127,9 +130,22 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
     }
 
     public enum VCInputType {
+        /**
+         * 数字类型
+         */
         NUMBER,
+
+        /**
+         * 数字密码
+         */
         NUMBERPASSWORD,
+        /**
+         * 文字
+         */
         TEXT,
+        /**
+         * 文字密码
+         */
         TEXTPASSWORD,
     }
 
@@ -141,12 +157,13 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         mEtNumber = typedArray.getInteger(R.styleable.vericationCodeView_vcv_et_number, 4);
         int inputType = typedArray.getInt(R.styleable.vericationCodeView_vcv_et_inputType, VCInputType.NUMBER.ordinal());
         mEtInputType = VCInputType.values()[inputType];
+        Log.i("main", "mEtInputType:" + mEtInputType);
         mEtWidth = typedArray.getDimensionPixelSize(R.styleable.vericationCodeView_vcv_et_width, 120);
         mEtTextColor = typedArray.getColor(R.styleable.vericationCodeView_vcv_et_text_color, Color.BLACK);
         mEtTextSize = typedArray.getDimensionPixelSize(R.styleable.vericationCodeView_vcv_et_text_size, 16);
         mEtTextBg = typedArray.getResourceId(R.styleable.vericationCodeView_vcv_et_bg, R.drawable.et_login_code);
         mCursorDrawable = typedArray.getResourceId(R.styleable.vericationCodeView_vcv_et_cursor, R.drawable.et_cursor);
-
+        cursorVisible = typedArray.getBoolean(R.styleable.vericationCodeView_vcv_et_cursor_visible, true);
         //释放资源
         typedArray.recycle();
         initView();
@@ -177,10 +194,11 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         editText.setLayoutParams(layoutParams);
         editText.setGravity(Gravity.CENTER);
         editText.setId(i);
-        editText.setCursorVisible(true);
+        editText.setCursorVisible(false);
         editText.setMaxEms(1);
         editText.setTextColor(mEtTextColor);
         editText.setTextSize(mEtTextSize);
+        editText.setCursorVisible(true);
         editText.setMaxLines(1);
         editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
         switch (mEtInputType) {
@@ -204,11 +222,13 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         editText.setBackgroundResource(mEtTextBg);
 
         //修改光标的颜色（反射）
-        try {
-            Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
-            f.setAccessible(true);
-            f.set(editText, mCursorDrawable);
-        } catch (Exception ignored) {
+        if (cursorVisible) {
+            try {
+                Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
+                f.setAccessible(true);
+                f.set(editText, mCursorDrawable);
+            } catch (Exception ignored) {
+            }
         }
         editText.addTextChangedListener(this);
         editText.setOnFocusChangeListener(this);
@@ -260,7 +280,9 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         for (int i = 0; i < count; i++) {
             editText = (EditText) getChildAt(i);
             if (editText.getText().length() < 1) {
-                editText.setCursorVisible(true);
+                if (cursorVisible) {
+                    editText.setCursorVisible(true);
+                }
                 editText.requestFocus();
                 return;
             } else {
@@ -281,7 +303,9 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
             editText = (EditText) getChildAt(i);
             if (editText.getText().length() >= 1) {
                 editText.setText("");
-                editText.setCursorVisible(true);
+                if (cursorVisible) {
+                    editText.setCursorVisible(true);
+                }
                 editText.requestFocus();
                 return;
             }

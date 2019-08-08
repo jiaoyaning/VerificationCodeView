@@ -16,7 +16,22 @@
         android:orientation="horizontal"
         app:vcv_et_bg="@drawable/et_login_code"
         app:vcv_et_cursor="@drawable/et_cursor"
-        app:vcv_et_inputType="number"
+        app:vcv_et_inputType="numberPassword"
+        app:vcv_et_number="4"
+        app:vcv_et_text_color="@android:color/black"
+        app:vcv_et_text_size="6sp" />
+
+    <com.jyn.vcview.VerificationCodeView
+        android:id="@+id/verificationcodeview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:vcv_et_bg="@drawable/et_login_code"
+        app:vcv_et_cursor="@drawable/et_cursor"
+        app:vcv_et_cursor_visible="false"
+        app:vcv_et_inputType="numberPassword"
         app:vcv_et_number="4"
         app:vcv_et_text_color="@android:color/black"
         app:vcv_et_text_size="6sp" />
@@ -34,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:onClick="clear"
         android:layout_marginTop="20dp"
+        android:onClick="clear"
         android:text="清空输入框" />
 </LinearLayout>
