@@ -20,9 +20,9 @@ import java.lang.reflect.Field;
 
 /**
  * jiaoyaning
- * com.b2cf.nonghe.widget
  * VerificationCodeView
  * 2017/10/31
+ * update 2019/8/8
  */
 
 public class VerificationCodeView extends LinearLayout implements TextWatcher, View.OnKeyListener, View.OnFocusChangeListener {
@@ -312,5 +312,20 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
 
     public interface OnCodeFinishListener {
         void onComplete(String content);
+    }
+
+    /**
+     * 清空验证码输入框
+     */
+    public void setEmpty() {
+        EditText editText;
+        for (int i = mEtNumber - 1; i >= 0; i--) {
+            editText = (EditText) getChildAt(i);
+            editText.setText("");
+            if (i == 0) {
+                editText.setCursorVisible(true);
+                editText.requestFocus();
+            }
+        }
     }
 }

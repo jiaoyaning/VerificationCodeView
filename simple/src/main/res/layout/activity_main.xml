@@ -27,5 +27,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:text="验证码"
         android:textSize="20sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="clear"
+        android:layout_marginTop="20dp"
+        android:text="清空输入框" />
 </LinearLayout>
