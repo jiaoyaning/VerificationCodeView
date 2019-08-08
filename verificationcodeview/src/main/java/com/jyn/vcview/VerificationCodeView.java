@@ -235,7 +235,7 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_DEL) {
+        if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
             backFocus();
         }
         return false;
@@ -275,17 +275,14 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
     }
 
     private void backFocus() {
-        //博主手机不好，经常点一次却触发两次`onKey`事件，就设置了一个防止多点击，间隔100毫秒。
-        long startTime = System.currentTimeMillis();
         EditText editText;
         //循环检测有字符的`editText`，把其置空，并获取焦点。
         for (int i = mEtNumber - 1; i >= 0; i--) {
             editText = (EditText) getChildAt(i);
-            if (editText.getText().length() >= 1 && startTime - endTime > 100) {
+            if (editText.getText().length() >= 1) {
                 editText.setText("");
                 editText.setCursorVisible(true);
                 editText.requestFocus();
-                endTime = startTime;
                 return;
             }
         }
