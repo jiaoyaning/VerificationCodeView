@@ -191,22 +191,18 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
             EditText editText = new EditText(mContext);
             initEditText(editText, i);
             addView(editText);
-            if (i == 0) { //设置第一个editText获取焦点
+            //设置第一个editText获取焦点
+            if (i == 0) {
                 editText.setFocusable(true);
             }
         }
     }
 
     private void initEditText(EditText editText, int i) {
-
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(mEtWidth, mEtWidth);
-//        layoutParams.bottomMargin = childVPadding;
-//        layoutParams.topMargin = childVPadding;
         layoutParams.leftMargin = mEtSpacing;
         layoutParams.rightMargin = mEtSpacing;
-        
         layoutParams.gravity = Gravity.CENTER;
-
         editText.setLayoutParams(layoutParams);
         editText.setGravity(Gravity.CENTER);
         editText.setId(i);
@@ -252,6 +248,13 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         editText.setOnKeyListener(this);
     }
 
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int measuredWidth = getMeasuredWidth();
+        Log.i("main", "measuredWidth:" + measuredWidth);
+    }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -306,8 +309,12 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
                 return;
             } else {
                 editText.setCursorVisible(false);
+                if (i == count - 1) {
+                    editText.requestFocus();
+                }
             }
         }
+
         //如果最后一个输入框有字符，则返回结果
         EditText lastEditText = (EditText) getChildAt(mEtNumber - 1);
         if (lastEditText.getText().length() > 0) {
