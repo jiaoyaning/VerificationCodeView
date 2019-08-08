@@ -1,22 +1,23 @@
 package com.jyn.vcview;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.Color;
+import android.os.Build;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 
 import java.lang.reflect.Field;
 
@@ -27,7 +28,7 @@ import java.lang.reflect.Field;
  * update 2019/8/8
  */
 
-public class VerificationCodeView extends LinearLayout implements TextWatcher, View.OnKeyListener {
+public class VerificationCodeView extends LinearLayout implements TextWatcher, View.OnKeyListener, View.OnFocusChangeListener {
 
     private Context mContext;
     private OnCodeFinishListener onCodeFinishListener;
@@ -217,8 +218,10 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void initEditText(EditText editText, int i) {
         editText.setLayoutParams(getETLayoutParams(i));
+        editText.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
         editText.setGravity(Gravity.CENTER);
         editText.setId(i);
         editText.setCursorVisible(false);
@@ -251,6 +254,7 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         setEditTextCursorDrawable(editText);
         editText.addTextChangedListener(this);
         editText.setOnKeyListener(this);
+        editText.setOnFocusChangeListener(this);
     }
 
     /**
@@ -272,8 +276,8 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
                 layoutParams.rightMargin = mEtBisectSpacing / 2;
             }
         } else {
-            layoutParams.leftMargin = mEtSpacing;
-            layoutParams.rightMargin = mEtSpacing;
+            layoutParams.leftMargin = mEtSpacing / 2;
+            layoutParams.rightMargin = mEtSpacing / 2;
         }
 
         layoutParams.gravity = Gravity.CENTER;
@@ -299,20 +303,18 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         updateETMargin();
     }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-    }
-
     private void updateETMargin() {
         for (int i = 0; i < mEtNumber; i++) {
             EditText editText = (EditText) getChildAt(i);
             editText.setLayoutParams(getETLayoutParams(i));
+        }
+    }
+
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if (b) {
+            focus();
         }
     }
 

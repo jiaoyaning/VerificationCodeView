@@ -7,6 +7,13 @@
     android:orientation="vertical"
     tools:context="com.jyn.vcview.simple.MainActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="输入框距离平分,未隐藏光标，明文密码" />
+
     <com.jyn.vcview.VerificationCodeView
         android:id="@+id/verificationcodeview"
         android:layout_width="match_parent"
@@ -16,8 +23,7 @@
         android:orientation="horizontal"
         app:vcv_et_bg="@drawable/et_login_code"
         app:vcv_et_cursor="@drawable/et_cursor"
-        app:vcv_et_cursor_visible="false"
-        app:vcv_et_inputType="numberPassword"
+        app:vcv_et_inputType="number"
         app:vcv_et_number="4"
         app:vcv_et_text_color="@android:color/black"
         app:vcv_et_text_size="6sp" />
@@ -29,7 +35,46 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="输入开始:" />
+        android:text="输入未开始:" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="输入框间距6dp，隐藏光标，隐藏密码" />
+
+    <com.jyn.vcview.VerificationCodeView
+        android:id="@+id/verificationcodeview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:vcv_et_bg="@drawable/et_code_test1"
+        app:vcv_et_cursor="@drawable/et_cursor"
+        app:vcv_et_cursor_visible="false"
+        app:vcv_et_inputType="numberPassword"
+        app:vcv_et_number="6"
+        app:vcv_et_spacing="6dp"
+        app:vcv_et_text_color="#FFC107"
+        app:vcv_et_text_size="6sp" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="输入未开始:" />
 
     <Button
         android:layout_width="match_parent"
