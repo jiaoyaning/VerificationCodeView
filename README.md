@@ -2,7 +2,7 @@
 Android 自定义方形输入框，仿滴滴验证码、小篮单车验证码输入框
 
 ## 效果图
-## V1.0.1版(上传bintray一直未成功，还在努力)
+## V1.0.1版
 ![Screenshot](screenshot/screenshot_1.0.1.gif)  
 
 fix bug : [验证码输入错误清空输入框 #7](https://github.com/jiaoyaning/VerificationCodeView/issues/7)  
@@ -57,6 +57,13 @@ public interface OnCodeFinishListener {
 
     </declare-styleable>
 ```
+
+```
+dependencies {
+     implementation 'com.jyn.verificationcodeview:verificationcodeview:1.0.1'
+}
+```
+
 
 #### ———————————一只分割线———————————
 
