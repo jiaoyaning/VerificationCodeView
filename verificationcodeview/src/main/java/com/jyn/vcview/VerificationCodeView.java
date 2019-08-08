@@ -198,7 +198,7 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
         editText.setMaxEms(1);
         editText.setTextColor(mEtTextColor);
         editText.setTextSize(mEtTextSize);
-        editText.setCursorVisible(true);
+        editText.setCursorVisible(cursorVisible);
         editText.setMaxLines(1);
         editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
         switch (mEtInputType) {
