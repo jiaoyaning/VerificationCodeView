@@ -209,7 +209,7 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
                 break;
             case NUMBERPASSWORD:
                 editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-                editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                editText.setTransformationMethod(new AsteriskPasswordTransformationMethod());
                 break;
             case TEXT:
                 editText.setInputType(InputType.TYPE_CLASS_TEXT);
