@@ -415,7 +415,9 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
     }
 
     public interface OnCodeFinishListener {
-
+        /**
+         * 文本改变
+         */
         void onTextChange(View view, String content);
 
         /**
