@@ -282,6 +282,8 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
             if (editText.getText().length() < 1) {
                 if (cursorVisible) {
                     editText.setCursorVisible(true);
+                }else {
+                    editText.setCursorVisible(false);
                 }
                 editText.requestFocus();
                 return;
@@ -305,6 +307,8 @@ public class VerificationCodeView extends LinearLayout implements TextWatcher, V
                 editText.setText("");
                 if (cursorVisible) {
                     editText.setCursorVisible(true);
+                }else {
+                    editText.setCursorVisible(false);
                 }
                 editText.requestFocus();
                 return;
