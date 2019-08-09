@@ -1,16 +1,18 @@
 # VerificationCodeView
-Android 自定义方形输入框，仿滴滴验证码、小篮单车验证码输入框
+> `Android` 自定义方形输入框，仿滴滴验证码、小篮单车验证码输入框
+
+---
 
 ## 效果图
-## V1.0.1版
+## V1.0.1 版
 ![Screenshot](screenshot/screenshot_1.0.1.gif)  
 
-fix bug : [验证码输入错误清空输入框 #7](https://github.com/jiaoyaning/VerificationCodeView/issues/7)  
-fix bug : [关于博主手机不好，经常点一次却触发两次`onKey`事件，就设置了一个防止多点击，间隔100毫秒。#6](https://github.com/jiaoyaning/VerificationCodeView/issues/6)  
-fix bug : 暗文密码模式无效果  
-update : 添加输入框平分等间距模式，并可设置输入框间距  
-update ：添加清空输入框方法  
-update ：添加文本改变回调  
++ `fix bug` ：[验证码输入错误清空输入框 #7](https://github.com/jiaoyaning/VerificationCodeView/issues/7)  
++ `fix bug` ：[关于博主手机不好，经常点一次却触发两次`onKey`事件，就设置了一个防止多点击，间隔100毫秒。#6](https://github.com/jiaoyaning/VerificationCodeView/issues/6)  
++ `fix bug` ：暗文密码模式无效果问题  
++ `update` ：添加输入框平分等间距模式，并可设置输入框间距  
++ `update` ：添加清空输入框方法  
++ `update` ：修改`Listener`，添加文本改变时回调方法  
 
 ### 监听
 ```
@@ -52,11 +54,13 @@ public interface OnCodeFinishListener {
         <attr name="vcv_et_cursor" format="reference" />
         <!--是否隐藏光标-->
         <attr name="vcv_et_cursor_visible" format="boolean" />
-        <!--输入框间距，不输入则代表平分-->
+        <!--输入框间距，如果不设置则会把输入框位置平分-->
         <attr name="vcv_et_spacing" format="dimension|reference" />
 
     </declare-styleable>
 ```
+
+### Gradle
 
 ```
 dependencies {
@@ -64,18 +68,23 @@ dependencies {
 }
 ```
 
+---
 
-#### ———————————一只分割线———————————
+分割线  
 
-## V1.0.0版
+---
+
+
+## V1.0.0版 (源码在`branch` [[`V1.0.0`]](https://github.com/jiaoyaning/VerificationCodeView/tree/V1.0.0))
+
 
 ![Screenshot](screenshot/screenshot.gif)
 
-GIF被压缩的有点模糊，下面是截图
+`GIF`被压缩的有点模糊，下面是截图
 
 ![Screenshot](screenshot/screenshot.jpg)
 
----
+
 ## 用法
 
 ```
@@ -185,6 +194,6 @@ CSDN：[http://blog.csdn.net/jiaoyaning1210/article/details/78427818](http://blo
 
 ---
 
-如果对您有帮助的话，还请给个star，谢谢！
+如果对您有帮助的话，还请给个`star`，谢谢！
 
 ---
